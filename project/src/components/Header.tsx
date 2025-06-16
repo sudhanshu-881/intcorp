@@ -35,7 +35,7 @@ const Header: React.FC = () => {
               <div className="bg-emerald-600 p-2 rounded-lg">
                 <Recycle className="h-6 w-6 text-white" />
               </div>
-              <span className="text-2xl font-bold text-gray-900">EcoTrade</span>
+              <span className="text-2xl font-bold text-gray-900">int.Corp</span>
             </Link>
 
             {/* Search Bar */}
