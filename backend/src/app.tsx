@@ -24,9 +24,20 @@ mongoose.connect(process.env.MONGO_URI!, {
   .then(() => console.log('✅ MongoDB connected'))
   .catch((err) => console.error('❌ MongoDB connection error:', err));
 
+// CORS configuration
+const allowedOrigins = [
+  'http://localhost:5173', // Vite default
+  'http://localhost:3000', // React default
+  process.env.FRONTEND_URL, // Add your production frontend URL in .env as FRONTEND_URL=https://your-frontend.com
+].filter(Boolean);
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, // Set to true if you need to send cookies or auth headers
+}));
+
 // Middleware
 app.use(helmet());
-app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
