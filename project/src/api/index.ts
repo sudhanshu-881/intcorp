@@ -1,5 +1,18 @@
 const API_BASE = import.meta.env.VITE_API_URL;
 
+export const createProduct = async (product: any, token: string) => {
+  const res = await fetch(`${API_BASE}/products`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(product),
+  });
+  if (!res.ok) throw new Error('Failed to create product');
+  return res.json();
+};
+
 export const fetchProducts = async () => {
   const res = await fetch(`${API_BASE}/products`);
   if (!res.ok) throw new Error('Failed to fetch products');
