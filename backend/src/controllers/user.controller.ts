@@ -60,7 +60,7 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
     return res.status(403).json({ message: 'Not authorized to delete this user' });
   }
 
-  await user.remove();
+  await user.deleteOne();
 
   res.json({ message: 'User removed' });
 };

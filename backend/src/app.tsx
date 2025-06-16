@@ -1,8 +1,9 @@
-// backend/src/app.ts
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
@@ -10,7 +11,18 @@ import productRoutes from './routes/product.routes';
 
 import { errorHandler } from './middleware/error.middleware';
 
+// Load environment variables
+dotenv.config();
+
 const app = express();
+
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI!, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+} as mongoose.ConnectOptions)
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // Middleware
 app.use(helmet());
